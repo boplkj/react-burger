@@ -29,8 +29,8 @@ export default function BurgerIngredients({data}) {
           <div className = {styles.cardWrap}>
             {
             data.map(item => (item.type==='bun'?
-              <section className ={styles.ingredientCard} >
-              <BurgerIngredientItem key={item._id} image={item.image} price={item.price} name={item.name}/>
+              <section className ={styles.ingredientCard}  key={item._id} >
+              <BurgerIngredientItem image={item.image} price={item.price} name={item.name}/>
               </section>
               :null
             ))
@@ -42,8 +42,8 @@ export default function BurgerIngredients({data}) {
           <div className = {styles.cardWrap}>
             {
             data.map(item => (item.type==='main'?
-              <section className ={styles.ingredientCard} >
-              <BurgerIngredientItem key={item._id} image={item.image} price={item.price} name={item.name}/>
+              <section className ={styles.ingredientCard} key={item._id}>
+              <BurgerIngredientItem image={item.image} price={item.price} name={item.name}/>
               </section>
               :null
             ))
@@ -55,8 +55,8 @@ export default function BurgerIngredients({data}) {
           <div className = {styles.cardWrap}>
             {
             data.map(item => (item.type==='sauce'?
-              <section className ={styles.ingredientCard} >
-              <BurgerIngredientItem key={item._id} image={item.image} price={item.price} name={item.name}/>
+              <section className ={styles.ingredientCard} key={item._id} >
+              <BurgerIngredientItem image={item.image} price={item.price} name={item.name}/>
               </section>
               :null
             ))

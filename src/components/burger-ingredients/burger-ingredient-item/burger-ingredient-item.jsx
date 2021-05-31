@@ -6,7 +6,7 @@ import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 export default function BurgerIngredientItem({image, price, name}) {
   console.log(image)
   return(
-      <div className={styles.root}>
+      <div className={styles.root} >
         <section className={styles.image}>
           <img src={image} alt = ''/>
           </section>
