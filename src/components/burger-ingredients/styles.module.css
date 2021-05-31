@@ -1,0 +1,35 @@
+.root{
+  width: 600px;
+}
+.title{
+  composes: text text_type_main-large from global;
+}
+.tabs{ 
+  display: flex;
+  flex-direction: row;
+  composes: text  mt-5 from global;
+}
+.categoryName{
+  display: flex;
+  composes: text text_type_main-medium mt-10 from global;
+}
+
+.cardWrap{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.ingredientCard{
+  display: flex;
+  composes: ml-4 mr-2 mt-6 from global;
+}
+
+.scroll{
+  display: flex;
+  flex-direction: column;
+  
+  overflow-y: scroll;
+  height: calc(100vh - 255px) 
+
+}

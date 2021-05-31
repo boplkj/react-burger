@@ -1,0 +1,30 @@
+.root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 272px;
+  height: 208px;
+  
+}
+.image {
+  display: flex;
+  composes:  ml-4 mr-4 from global;
+}
+
+.price{
+  display: flex;
+  justify-content: center;
+  composes:  text  text_type_main-default mt-1 from global;
+}
+
+.priceNum{
+  display: flex;
+  composes:  text  text_type_digits-default pr-1 from global;
+}
+
+.itemName{
+  display: flex;
+  text-align: center;
+  composes:  text  text_type_main-default  from global;
+}
+

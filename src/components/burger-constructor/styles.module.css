@@ -1,0 +1,41 @@
+.root{
+  display: flex;
+  flex-direction:column;
+  width: 600px;
+  composes: mt-25 from global;
+}
+
+.topBulka{
+  composes: pl-6 from global;
+}
+.scroll{
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 470px);
+  overflow-y: scroll;
+  composes: pr-6 from global;
+}
+
+.bottomBulka{
+  composes: pl-6 from global;
+}
+
+.sumText{
+  composes: text text_type_digits-medium from global;
+}
+
+.sum{
+  display: flex;
+  flex-direction:row;
+  justify-content: flex-end;
+  align-items: center;
+  composes: mt-6 from global;
+}
+.sum svg{
+  width: 33px;
+  height: 33px;
+}
+
+.button{
+  composes: text pl-10 from global;
+}
