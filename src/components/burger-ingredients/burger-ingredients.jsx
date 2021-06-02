@@ -28,11 +28,10 @@ export default function BurgerIngredients({data}) {
            <span className = {styles.categoryName}>Булки</span>
           <div className = {styles.cardWrap}>
             {
-            data.map(item => (item.type==='bun'?
+            data.map(item => (item.type==='bun' &&
               <section className ={styles.ingredientCard}  key={item._id} >
               <BurgerIngredientItem image={item.image} price={item.price} name={item.name}/>
               </section>
-              :null
             ))
           }
         </div>
@@ -41,11 +40,10 @@ export default function BurgerIngredients({data}) {
            <span className = {styles.categoryName}>Начинки</span>
           <div className = {styles.cardWrap}>
             {
-            data.map(item => (item.type==='main'?
+            data.map(item => (item.type==='main' &&
               <section className ={styles.ingredientCard} key={item._id}>
               <BurgerIngredientItem image={item.image} price={item.price} name={item.name}/>
               </section>
-              :null
             ))
           }
         </div>
@@ -54,11 +52,10 @@ export default function BurgerIngredients({data}) {
            <span className = {styles.categoryName}>Соусы</span>
           <div className = {styles.cardWrap}>
             {
-            data.map(item => (item.type==='sauce'?
+            data.map(item => (item.type==='sauce' &&
               <section className ={styles.ingredientCard} key={item._id} >
               <BurgerIngredientItem image={item.image} price={item.price} name={item.name}/>
               </section>
-              :null
             ))
           }
         </div>

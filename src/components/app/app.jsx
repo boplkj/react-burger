@@ -6,7 +6,7 @@ import BurgerConstructor from '../burger-constructor/burger-constructor'
 import styles from './styles.module.css'
 
 
-export default function BurgerMain() {
+export default function App() {
 
   return(
         <>

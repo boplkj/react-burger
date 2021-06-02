@@ -16,9 +16,14 @@
   composes: pr-6 from global;
 }
 
-.bottomBulka{
-  composes: pl-6 from global;
+.ingredientMargin{
+  composes: mt-4 from global;
 }
+.bottomBulka{
+  composes: pl-6 mt-4 from global;
+}
+
+
 
 .sumText{
   composes: text text_type_digits-medium from global;

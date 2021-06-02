@@ -21,7 +21,7 @@ export default function BurgerConstructor({data}) {
     </section>
     <section className={styles.scroll}>
       {otherIngredients.map(item=>
-      <section key={item._id}>
+      <section key={item._id} className={styles.ingredientMargin}>
         <DragIcon/>
         <ConstructorElement
           text={item.name}
