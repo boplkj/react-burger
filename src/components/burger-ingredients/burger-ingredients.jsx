@@ -5,10 +5,10 @@ import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientItem from './burger-ingredient-item/burger-ingredient-item'
 
 export default function BurgerIngredients({data}) {
-  
-  const [current, setCurrent] = React.useState('one')
-
   console.log(data)
+  const [current, setCurrent] = React.useState('one')
+  const idWithCounter = '60ba270fbd26ff0027981027'
+
   return(
         <div className={styles.root}>
           <span className={styles.title}>Соберите Бургер</span>
@@ -28,9 +28,9 @@ export default function BurgerIngredients({data}) {
            <span className = {styles.categoryName}>Булки</span>
           <div className = {styles.cardWrap}>
             {
-            data.map(item => (item.type==='bun' &&
+            data.map((item,index) => (item.type==='bun' &&
               <section className ={styles.ingredientCard}  key={item._id} >
-              <BurgerIngredientItem image={item.image} price={item.price} name={item.name}/>
+              <BurgerIngredientItem data={data[index]} count={item._id===idWithCounter && 1}/>
               </section>
             ))
           }
@@ -40,9 +40,9 @@ export default function BurgerIngredients({data}) {
            <span className = {styles.categoryName}>Начинки</span>
           <div className = {styles.cardWrap}>
             {
-            data.map(item => (item.type==='main' &&
+            data.map((item, index) => (item.type==='main' &&
               <section className ={styles.ingredientCard} key={item._id}>
-              <BurgerIngredientItem image={item.image} price={item.price} name={item.name}/>
+              <BurgerIngredientItem data={data[index]} />
               </section>
             ))
           }
@@ -52,9 +52,9 @@ export default function BurgerIngredients({data}) {
            <span className = {styles.categoryName}>Соусы</span>
           <div className = {styles.cardWrap}>
             {
-            data.map(item => (item.type==='sauce' &&
+            data.map((item, index) => (item.type==='sauce' &&
               <section className ={styles.ingredientCard} key={item._id} >
-              <BurgerIngredientItem image={item.image} price={item.price} name={item.name}/>
+              <BurgerIngredientItem data={data[index]}/>
               </section>
             ))
           }

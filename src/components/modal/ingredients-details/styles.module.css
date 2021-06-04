@@ -1,0 +1,36 @@
+.root{
+display: flex;
+justify-content: space-between;
+flex-direction: column;
+composes: mt-2 from global;
+}
+.ingredientHeader{
+display: flex;
+align-items: center;
+flex-direction:column
+}
+.ingredientImage{
+width: 480px;
+height: 240px;
+}
+.itemName{
+  composes: mt-4 text text_type_main-medium from global;
+}
+.ingredientTable{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  composes: mt-8 from global;
+}
+.ingredientCell{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tableItemText{
+  composes: text text_type_main-default text_color_inactive from global;
+}
+.tableItemNumber{
+  composes: text mt-2 text_type_digits-default text_color_inactive from global;
+}
+

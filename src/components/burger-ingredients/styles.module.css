@@ -13,23 +13,18 @@
   display: flex;
   composes: text text_type_main-medium mt-10 from global;
 }
-
 .cardWrap{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-
 .ingredientCard{
   display: flex;
   composes: ml-4 mr-2 mt-6 from global;
 }
-
 .scroll{
   display: flex;
   flex-direction: column;
-  
   overflow-y: scroll;
   height: calc(100vh - 255px) 
-
 }
