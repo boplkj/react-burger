@@ -1,0 +1,37 @@
+.root{
+  display: flex;
+  align-items: center;
+  width:1240px;
+}
+.rightSide{
+
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  }
+.logo{
+  display: flex;
+
+  flex-grow: 1;
+}
+
+.leftSide
+{  
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.menuTap{
+  display: flex;
+  align-items: center;
+  composes: p-5 m-4 from global;
+
+}
+.text {
+  text-align: center;
+  composes: text  text_type_main-default ml-2 from global;
+}
+
+
