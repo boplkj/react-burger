@@ -12,7 +12,7 @@ export default function OrderDetails({orderId}) {
         <span className={styles.orderNumber}>{orderId}</span>
         <span className={styles.orderIdText}> идентификатор заказа </span>
         <section>
-        <img src={check} className={styles.checkImage} alt='' />
+        <img src={check} className={styles.checkImage} alt='Your order is being cooked' />
         {/* <CheckMarkIcon/> */}
         </section>
         <span className = {styles.orderMessage}>Ваш заказ начали готовить</span>

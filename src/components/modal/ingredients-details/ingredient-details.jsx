@@ -8,7 +8,7 @@ export default function IngredientDetails({data}) {
   return(
     <div className={styles.root}>
       <section className={styles.ingredientHeader}>
-      <img src={data.image} className={styles.ingredientImage} alt='' />
+      <img src={data.image} className={styles.ingredientImage} alt={data.name} />
 
         <section className={styles.itemName} >
           <span className={styles.orderNumber}>{data.name}</span>

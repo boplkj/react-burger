@@ -6,18 +6,20 @@ import Modal from '../../modal/modal'
 import IngredientDetails from '../../modal/ingredients-details/ingredient-details'
 
 export default function BurgerIngredientItem({data, count}) {
-const [isOpen ,setIsOpen] = useState(false)
+const [handleClose ,setHandleClose] = useState(false)
 console.log(count)
   return(
     <>
-      <div className={styles.root} onClick={()=> setIsOpen(true)} >
+      <div className={styles.root} onClick={()=> setHandleClose(true)} >
        
         <section className={styles.image}>
-        {count && <section className={styles.counter}>
-        <Counter count={count} size="default" />
-        </section>
+        {count && (
+          <section className={styles.counter}>
+          <Counter count={count} size="default" />
+          </section>
+          )
         }
-          <img src={data.image} alt = ''/>
+          <img src={data.image} alt = {data.name}/>
           </section>
          
          <section className={styles.price} >
@@ -27,8 +29,8 @@ console.log(count)
        <span className = {styles.itemName}>{data.name}</span>
        </div>
        {
-         isOpen && 
-         <Modal isOpen = {() =>{setIsOpen(false)}} title={true} >
+         handleClose && 
+         <Modal handleClose = {() =>{setHandleClose(false)}} title='Детали ингредиента' >
          <IngredientDetails data={data}/>
         </Modal>
        }

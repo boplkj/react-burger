@@ -15,19 +15,20 @@ const[error, setError] = useState('')
   useEffect(() => {
     const getProductData = async () => {
       setLoading(true);
-        const res = await fetch(INGREDIENTS_API_URL)
-        if (res.ok) { 
-          const dataConst = await res.json()
-          setLoadingData(dataConst.data)
-        } else {
-          setError("Ошибка HTTP: " + res.status)
-        }
+      const res = await fetch(INGREDIENTS_API_URL)
+      if (res.ok) { 
+        const dataConst = await res.json()
+        setLoadingData(dataConst.data)
         setLoading(false)
+      } else {
+        setError("Ошибка HTTP: " + res.status)
+      }
     }
     try{
-    getProductData();
+      getProductData();
     } catch (e) {
       setError('Произошла какая-то ошибка')
+      setLoading(false)
     }
 }, [])
 
@@ -38,7 +39,8 @@ const[error, setError] = useState('')
           <AppHeader />
           </section>
           {!loading && !error
-          ? <section className = {styles.roott}>
+          ? (
+          <section className = {styles.roott}>
           <section className={styles.root} >
             <section className={styles.left}>
           <BurgerIngredients  data = {loadingData}/>
@@ -47,10 +49,13 @@ const[error, setError] = useState('')
           <BurgerConstructor  data = {loadingData}/>
             </section>
           </section>
-          </section> 
-          : loading
-        ? <div>Загрузка</div> 
-        : error&& <span>{error}</span>
-        }
+          </section>
+          ) : loading? (
+          <div>Загрузка</div> 
+          )
+          : error&& (
+          <span>{error}</span>
+          )
+          }
         </>
         )}

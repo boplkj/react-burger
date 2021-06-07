@@ -9,12 +9,12 @@ export default function BurgerConstructor({data}) {
   const bun = data.filter(item=> item.type==='bun')
   const otherIngredients = data.filter(item=> item.type!=='bun')
   const sum = data.reduce((acc,val)=> acc + val.price,0)
-  const [isOpen, setIsOpen] = useState(false)
+  const [handleClose, setHandleClose] = useState(false)
 
   return(
     <>
-     { isOpen &&
-          <Modal isOpen = {() =>{setIsOpen(false)}}>
+     { handleClose &&
+          <Modal handleClose = {() =>{setHandleClose(false)}}>
             <OrderDetails orderId="3123123"/>
         </Modal>
       }
@@ -44,16 +44,16 @@ export default function BurgerConstructor({data}) {
     <ConstructorElement
       type="bottom"
       isLocked={true}
-      text={bun.length===1? bun[0].name: bun[bun.length-1].name}
-      price={bun.length===1? bun[0].price: bun[bun.length-1].price}
-      thumbnail={bun.length===1? bun[0].image: bun[bun.length-1].image}
+      text={bun[0].name}
+      price={bun[0].price}
+      thumbnail={bun[0].image}
     /> 
     </section>
         <section className={styles.sum}> 
           <span className = {styles.sumText}>{sum}</span>
           <CurrencyIcon/>
           <section className={styles.button}>
-          <Button type="primary" size="large" onClick={()=> setIsOpen(true)} >
+          <Button type="primary" size="large" onClick={()=> setHandleClose(true)} >
             Оформить заказ
           </Button>
           </section>

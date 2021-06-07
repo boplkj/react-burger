@@ -18,7 +18,6 @@
   composes: mt-4 from global;
   display: flex;
   align-items: center;
-
 }
 .bottomBun{
   composes: pl-6 mt-4 from global;

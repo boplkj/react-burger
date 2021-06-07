@@ -5,29 +5,30 @@ import ModalOverlay from './modal-overlay/modal-overlay'
 import PropTypes from 'prop-types'
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
-export default function Modal({title, isOpen, children}){
+export default function Modal({title, handleClose, children}){
 
   useEffect(() => {
     const close = (e) => {
       if(e.key === 'Escape'){
-        isOpen()
+        handleClose()
       }
     }
     document.addEventListener('keydown', close)
   return () => document.removeEventListener('keydown', close)
-},[isOpen])
+},[handleClose])
 
   return ReactDOM.createPortal (
-    <ModalOverlay isOpen={isOpen}>
+    <ModalOverlay handleClose={handleClose}>
     <div className={styles.root } onClick={e => e.stopPropagation()}>
       <section className={styles.modal} >
       <section className={styles.header}>
         <section>
-          {title && 
-          <span className = {styles.modalText} >Детали ингредиента </span>
+          {title && (
+          <span className = {styles.modalText} >{title}</span>
+          )
           }
         </section>
-        <section onClick={isOpen} >
+        <section onClick={handleClose} >
           <CloseIcon/> 
         </section>
       </section>
@@ -39,7 +40,7 @@ export default function Modal({title, isOpen, children}){
   )
 }
 Modal.propTypes = {
-  title: PropTypes.bool,
-  isOpen: PropTypes.func
+  title: PropTypes.string,
+  handleClose: PropTypes.func
 }; 
 
