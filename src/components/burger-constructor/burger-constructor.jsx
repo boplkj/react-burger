@@ -9,12 +9,12 @@ export default function BurgerConstructor({data}) {
   const bun = data.filter(item=> item.type==='bun')
   const otherIngredients = data.filter(item=> item.type!=='bun')
   const sum = data.reduce((acc,val)=> acc + val.price,0)
-  const [handleClose, setHandleClose] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   return(
     <>
-     { handleClose &&
-          <Modal handleClose = {() =>{setHandleClose(false)}}>
+     { isOpen &&
+          <Modal handleClose = {() =>{setIsOpen(false)}}>
             <OrderDetails orderId="3123123"/>
         </Modal>
       }
@@ -53,7 +53,7 @@ export default function BurgerConstructor({data}) {
           <span className = {styles.sumText}>{sum}</span>
           <CurrencyIcon/>
           <section className={styles.button}>
-          <Button type="primary" size="large" onClick={()=> setHandleClose(true)} >
+          <Button type="primary" size="large" onClick={()=> setIsOpen(true)} >
             Оформить заказ
           </Button>
           </section>
