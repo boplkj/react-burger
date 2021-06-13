@@ -1,28 +1,47 @@
-import React from 'react'
+import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import styles from './styles.module.css'
-import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
+import Modal from '../../modal/modal'
+import IngredientDetails from '../../modal/ingredients-details/ingredient-details'
 
-export default function BurgerIngredientItem({image, price, name}) {
-  console.log(image)
+export default function BurgerIngredientItem({data, count}) {
+const [isOpen, setIsOpen] = useState(false)
+console.log(count)
   return(
-      <div className={styles.root} >
+    <>
+      <div className={styles.root} onClick={()=> setIsOpen(true)} >
+       
         <section className={styles.image}>
-          <img src={image} alt = ''/>
+        {count && (
+          <section className={styles.counter}>
+          <Counter count={count} size="default" />
+          </section>
+          )
+        }
+          <img src={data.image} alt = {data.name}/>
           </section>
          
          <section className={styles.price} >
-         <span className={styles.priceNum}>{price}</span>
+         <span className={styles.priceNum}>{data.price}</span>
          <CurrencyIcon/> 
        </section>
-       <span className = {styles.itemName}>{name}</span>
-       
+       <span className = {styles.itemName}>{data.name}</span>
        </div>
+       {
+         isOpen && 
+         <Modal handleClose = {() =>{setIsOpen(false)}} title='Детали ингредиента' >
+         <IngredientDetails data={data}/>
+        </Modal>
+       }
+       </>
         )}
 
         BurgerIngredientItem.propTypes = {
-            name: PropTypes.string.isRequired,
-            price: PropTypes.number.isRequired,
-            image: PropTypes.string.isRequired
+          data:PropTypes.shape({
+            name: PropTypes.string,
+            price: PropTypes.number,
+            image: PropTypes.string
+            }).isRequired
         }; 
   

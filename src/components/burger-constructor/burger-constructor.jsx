@@ -1,22 +1,31 @@
-import React from 'react'
+import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import styles from './styles.module.css'
 import {CurrencyIcon, DragIcon, ConstructorElement, Button} from '@ya.praktikum/react-developer-burger-ui-components'
-
+import Modal from '../modal/modal'
+import OrderDetails from '../modal/order-details/order-details'
+ 
 export default function BurgerConstructor({data}) {
-  const bulki = data.filter(item=> item.type==='bun')
+  const bun = data.filter(item=> item.type==='bun')
   const otherIngredients = data.filter(item=> item.type!=='bun')
   const sum = data.reduce((acc,val)=> acc + val.price,0)
+  const [isOpen, setIsOpen] = useState(false)
 
   return(
+    <>
+     { isOpen &&
+          <Modal handleClose = {() =>{setIsOpen(false)}}>
+            <OrderDetails orderId="3123123"/>
+        </Modal>
+      }
     <div className={styles.root}>
-      <section className={styles.topBulka}>
+      <section className={styles.topBun}>
       <ConstructorElement
       type="top"
       isLocked={true}
-      text={bulki[0].name}
-      price={bulki[0].price}
-      thumbnail={bulki[0].image}
+      text={bun[0].name}
+      price={bun[0].price}
+      thumbnail={bun[0].image}
     /> 
     </section>
     <section className={styles.scroll}>
@@ -31,25 +40,26 @@ export default function BurgerConstructor({data}) {
       </section>
       )}
       </section>
-      <section className={styles.bottomBulka}>
+      <section className={styles.bottomBun}>
     <ConstructorElement
       type="bottom"
       isLocked={true}
-      text={bulki.length===1? bulki[0].name: bulki[bulki.length-1].name}
-      price={bulki.length===1? bulki[0].price: bulki[bulki.length-1].price}
-      thumbnail={bulki.length===1? bulki[0].image: bulki[bulki.length-1].image}
+      text={bun[0].name}
+      price={bun[0].price}
+      thumbnail={bun[0].image}
     /> 
     </section>
         <section className={styles.sum}> 
           <span className = {styles.sumText}>{sum}</span>
           <CurrencyIcon/>
           <section className={styles.button}>
-          <Button type="primary" size="large" >
+          <Button type="primary" size="large" onClick={()=> setIsOpen(true)} >
             Оформить заказ
           </Button>
           </section>
           </section>
        </div>
+       </>
         )
       }
       

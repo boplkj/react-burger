@@ -1,0 +1,23 @@
+.root {
+  background-color: rgb(28,28,33);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: center;
+  composes:  text  p-10 from global;
+  width : 720px;
+
+}
+.header{
+width: 100%;
+display: flex;
+flex-direction:row;
+justify-content: space-between;
+align-items: center;
+text-align: center;
+}
+.modalText{
+composes: text  text_type_main-large from global;
+}
+.modal{
+  width: 100%;
+}
