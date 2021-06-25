@@ -1,36 +1,20 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
-import INGREDIENTS_API_URL from '../utils/url'
+import { useDispatch, useSelector } from 'react-redux'
+import { getIngridients } from '../../services/slices/ingredientsListSlice'
+
 //import localData from '../utils/local-data'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import styles from './styles.module.css'
 
 
 export default function App() {
-const [loadingData, setLoadingData] = useState([])
-const [loading, setLoading] = useState(true)
-const[error, setError] = useState('')
-
+  const ingredientsList = useSelector(store => store.ingredientsList)
+  const dispatch = useDispatch()
   useEffect(() => {
-    const getProductData = async () => {
-      setLoading(true);
-      const res = await fetch(INGREDIENTS_API_URL)
-      if (res.ok) { 
-        const dataConst = await res.json()
-        setLoadingData(dataConst.data)
-        setLoading(false)
-      } else {
-        setError("Ошибка HTTP: " + res.status)
-      }
-    }
-    try{
-      getProductData();
-    } catch (e) {
-      setError('Произошла какая-то ошибка')
-      setLoading(false)
-    }
-}, [])
+    dispatch(getIngridients())
+  },[dispatch])
 
   return(
     
@@ -38,23 +22,27 @@ const[error, setError] = useState('')
         <section className={styles.header}>
           <AppHeader />
           </section>
-          {!loading && !error
+          {
+            !ingredientsList.loading && 
+            !ingredientsList.error && 
+            ingredientsList.loadingData.length !== 0
+
           ? (
           <section className = {styles.roott}>
-          <section className={styles.root} >
-            <section className={styles.left}>
-          <BurgerIngredients  data = {loadingData}/>
-            </section>
+            <section className={styles.root} >
+              <section className={styles.left}>
+                <BurgerIngredients  data = {ingredientsList.loadingData}/>
+              </section>
             <section className={styles.right}>
-          <BurgerConstructor  data = {loadingData}/>
+              <BurgerConstructor  data = {ingredientsList.loadingData}/>
             </section>
           </section>
           </section>
-          ) : loading? (
+          ) : ingredientsList.loading? (
           <div>Загрузка</div> 
           )
-          : error&& (
-          <span>{error}</span>
+          : ingredientsList.error&& (
+          <span>{ingredientsList.error}</span>
           )
           }
         </>
