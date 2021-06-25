@@ -49,7 +49,7 @@ export default function BurgerConstructorDragged({item, index}) {
           <section ref={ref} key={item._id} className={styles.ingredientMargin}>
             <DragIcon/>
               <ConstructorElement
-                handleClose={()=>dispatch(removeIngredient(item))}
+                handleClose={()=>dispatch(removeIngredient({...item, index}))}
                 text={item.name}
                 price={item.price}
                 thumbnail={item.image}

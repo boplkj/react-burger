@@ -5,7 +5,7 @@ const constructorListSlice = createSlice({
   name: 'constructorListSlice',
   initialState: {
     items: [],
-    bun: {name: 'Это место зарезервировано под Булку', image: q },
+    bun: {name: 'Это место зарезервировано под Булку',image: q },
     sum: 0, 
   },reducers: {
     addIngredient: (state, action) => {
@@ -29,7 +29,7 @@ const constructorListSlice = createSlice({
         state.sum = state.sum - state.bun.price * 2
       } else {
       state.sum = state.sum - action.payload.price
-      state.items.splice(action.payload, 1)
+      state.items.splice(action.payload.index, 1)
       }
     },
     changeIndex: (state, action) =>{

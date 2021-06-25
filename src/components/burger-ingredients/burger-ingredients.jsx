@@ -13,7 +13,7 @@ export default function BurgerIngredients() {
   const mainRef = useRef()
   const sauceRef = useRef()
 
-const Visible = (ref) =>{
+const visible = (ref) =>{
   let targetPositionTop = window.pageYOffset + ref.current.getBoundingClientRect().top
   let targetPositionBottom = window.pageYOffset +  ref.current.getBoundingClientRect().bottom
   let windowPositionTop = window.pageYOffset
@@ -37,15 +37,15 @@ const Visible = (ref) =>{
 
     const minLength = Math.min(moduleLengthBuns, moduleLengthMain, moduleLengthSause)
     if (minLength===moduleLengthBuns) {
-      Visible(bunsRef) &&
+      visible(bunsRef) &&
       setCurrent('one')
     }
     else if (minLength === moduleLengthMain ) {
-      Visible(mainRef) &&
+      visible(mainRef) &&
       setCurrent('two')
     }
     else if (minLength === moduleLengthSause) {
-      Visible( sauceRef) &&
+      visible( sauceRef) &&
       setCurrent('three')
   }
 }
