@@ -24,13 +24,9 @@ const constructorListSlice = createSlice({
     }
   },
     removeIngredient: (state, action) => {
-      if (action.payload.type ==='bun') {
-        state.bun = action.payload
-        state.sum = state.sum - state.bun.price * 2
-      } else {
       state.sum = state.sum - action.payload.price
       state.items.splice(action.payload.index, 1)
-      }
+      
     },
     changeIndex: (state, action) =>{
       const startIndex = action.payload.startIndex
