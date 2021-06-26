@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import { useDispatch, useSelector } from 'react-redux'
-import { getIngridients } from '../../services/slices/ingredientsListSlice'
+import { getIngredients } from '../../services/slices/ingredientsListSlice'
 
 //import localData from '../utils/local-data'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
@@ -13,7 +13,7 @@ export default function App() {
   const ingredientsList = useSelector(store => store.ingredientsList)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getIngridients())
+    dispatch(getIngredients())
   },[dispatch])
 
   return(

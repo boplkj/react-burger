@@ -37,20 +37,16 @@ const ingredientsListSlice = createSlice({
 
 export const { requestSucces, requestError, request } = ingredientsListSlice.actions
 
-export const getIngridients = () => async(dispatch) => {
+export const getIngredients = () => (dispatch) => {
   dispatch(request())
-   const res = await fetch(INGREDIENTS_API_URL)
-    if(res.ok){
-      const dataConst = await res.json()
-      dispatch(requestSucces(dataConst.data))
-    } else {
-      dispatch(requestError("Ошибка HTTP: " + res.status))
-    }
-    try{
-      getIngridients();
-    } catch (e) {
-      dispatch(requestError())
-    }
+  fetch(INGREDIENTS_API_URL)
+    .then(res => res.ok ? res.json() : Promise.reject(res.status))
+    .then(({ data }) => {
+      dispatch(requestSucces(data))
+    })
+    .catch((e) => {
+      dispatch(requestError("Ошибка HTTP: " + e))
+    })
 }
 
 export default ingredientsListSlice.reducer

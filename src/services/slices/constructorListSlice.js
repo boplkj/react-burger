@@ -26,7 +26,6 @@ const constructorListSlice = createSlice({
     removeIngredient: (state, action) => {
       state.sum = state.sum - action.payload.price
       state.items.splice(action.payload.index, 1)
-      
     },
     changeIndex: (state, action) =>{
       const startIndex = action.payload.startIndex

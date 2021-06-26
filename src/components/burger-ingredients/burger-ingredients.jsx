@@ -25,6 +25,7 @@ const visible = (ref) =>{
   }
 }
 
+
   const onScroll=()=>{
     const scrollTop = scrollRef.current.getBoundingClientRect().top
     const bunsTop = bunsRef.current.getBoundingClientRect().top
@@ -37,16 +38,15 @@ const visible = (ref) =>{
 
     const minLength = Math.min(moduleLengthBuns, moduleLengthMain, moduleLengthSause)
     if (minLength===moduleLengthBuns) {
-      visible(bunsRef) &&
-      setCurrent('one')
+      visible(bunsRef)&& setCurrent('one')
     }
     else if (minLength === moduleLengthMain ) {
-      visible(mainRef) &&
-      setCurrent('two')
+      visible(mainRef)?
+      setCurrent('two'): setCurrent('one')
     }
     else if (minLength === moduleLengthSause) {
-      visible( sauceRef) &&
-      setCurrent('three')
+      visible(sauceRef)?
+      setCurrent('three'): setCurrent('two')
   }
 }
 
