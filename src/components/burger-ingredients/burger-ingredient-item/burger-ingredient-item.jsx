@@ -2,15 +2,41 @@ import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import styles from './styles.module.css'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
+import { useSelector } from 'react-redux'
 import Modal from '../../modal/modal'
 import IngredientDetails from '../../modal/ingredients-details/ingredient-details'
+import { useDrag } from 'react-dnd';
 
-export default function BurgerIngredientItem({data, count}) {
+export default function BurgerIngredientItem({data}) {
+
+
 const [isOpen, setIsOpen] = useState(false)
-console.log(count)
+
+const items = useSelector(store => store.constructorList.items)
+const bun = useSelector(store => store.constructorList.bun)
+
+let count 
+if (data.type ==='bun') {
+  if (data._id === bun._id) {
+    count = 1}
+  else count = null
+}else {
+ count = items.filter(item => item.id===data._id).length>=1? items.filter(item => item.id===data._id).length: null
+
+}
+
+
+const [, drag, ] = useDrag(() => ({
+  type:'item',
+  item: data,
+  collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+  }),
+}), []);
+
   return(
     <>
-      <div className={styles.root} onClick={()=> setIsOpen(true)} >
+      <div ref = {drag} className={styles.root} onClick={()=> setIsOpen(true)} >
        
         <section className={styles.image}>
         {count && (
