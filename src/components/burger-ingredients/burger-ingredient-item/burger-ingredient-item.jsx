@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import Modal from '../../modal/modal'
 import IngredientDetails from '../../modal/ingredients-details/ingredient-details'
 import { useDrag } from 'react-dnd';
+import { Link } from 'react-router-dom'
 
 export default function BurgerIngredientItem({data}) {
 
@@ -34,9 +35,10 @@ const [, drag, ] = useDrag(() => ({
   }),
 }), []);
 
+
   return(
     <>
-      <div ref = {drag} className={styles.root} onClick={()=> setIsOpen(true)} >
+      <div ref = {drag} className={styles.root} onClick={()=>  setIsOpen(true) && <Link to={`/ingredients/${data._id}`}/> } >
        
         <section className={styles.image}>
         {count && (

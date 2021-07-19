@@ -1,0 +1,41 @@
+.root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+}
+.formWrapper{
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  width: 480px;
+  composes: ml-30 from global;
+}
+
+.logo{
+  composes: mt-20 from global;
+}
+
+.textWrapper{
+  justify-content:center;
+  composes: mt-15 from global;
+}
+
+.text{
+  composes: text text_type_main-medium from global;
+}
+.input{
+  composes: mt-5 from global;
+}
+
+.button{
+  composes: mt-5 from global;
+}
+
+.link{
+  composes: mt-10 from global;
+  display: flex;
+  flex-direction: column;
+  align-items :center;
+}

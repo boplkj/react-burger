@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import styles from './styles.module.css'
  
 export default function IngredientDetails({data}) {
+  console.log(data,'datata')
 
   return(
     <div className={styles.root}>
@@ -39,6 +40,7 @@ export default function IngredientDetails({data}) {
 
         </section>
       </div>
+
         )
       }
       

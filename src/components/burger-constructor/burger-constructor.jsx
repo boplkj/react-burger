@@ -3,6 +3,7 @@ import styles from './styles.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { addIngredient } from '../../services/slices/constructorListSlice'
 import { useDrop } from 'react-dnd'
+import { Redirect } from 'react-router-dom'
 import {CurrencyIcon, ConstructorElement, Button} from '@ya.praktikum/react-developer-burger-ui-components'
 import Modal from '../modal/modal'
 import OrderDetails from '../modal/order-details/order-details'
@@ -15,6 +16,7 @@ export default function BurgerConstructor() {
   const otherIngredients = useSelector(store => store.constructorList.items)
   const sum = useSelector(store => store.constructorList.sum)
   const order = useSelector(store => store.order)
+  const store  = useSelector((store) => store.auth);
   const [, drop] = useDrop({
     accept: 'item',
     drop: (item) => {dispatch(addIngredient(item)) 
@@ -29,11 +31,17 @@ export default function BurgerConstructor() {
   const [isOpen, setIsOpen] = useState(false)
 
   const onClick= () => {
+    if (store.email){
     const idArr =  otherIngredients.map(item => item.id)
     const newArr = []
     newArr.push(idArr,bun._id,bun._id)
     dispatch(postOrder(newArr))
     setIsOpen(true)
+    } else{
+      console.log('here?? E')
+      return <Redirect to={'/login'}/>
+      //I dont understand why dont work? 
+    }
   }
 
   return(
