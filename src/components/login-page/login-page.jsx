@@ -34,6 +34,7 @@ export default function LoginPage() {
   return(
         <div className={styles.root}>
           <div className = {styles.formWrapper}>
+            <form className = {styles.form} onSubmit={login}>
           <section className={styles.logo}>
             <Logo/>
           </section>
@@ -55,10 +56,11 @@ export default function LoginPage() {
              />
           </section>
           <section className={styles.button}>
-            <Button onClick={login}>
+            <Button >
               Войти
             </Button>
           </section>
+          </form>
           <section className={styles.links}>
             <section >
               <span className={`text text_type_main-default text_color_inactive`}>

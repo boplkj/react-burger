@@ -1,14 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Feed from '../feed/feed'
 import feedDataProgress from '../utils/feed-data-progress'
 import styles from './styles.module.css'
 
 function FeedPage() {
+
   return (
     <div className={styles.root}>
       <div className = {styles.feed}>
-      <Feed/>
+      <Feed link={'feed'}/>
       </div>
       <div className={styles.orderWrapper}>
         <div className={styles.orders}>

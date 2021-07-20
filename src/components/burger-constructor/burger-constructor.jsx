@@ -3,7 +3,7 @@ import styles from './styles.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { addIngredient } from '../../services/slices/constructorListSlice'
 import { useDrop } from 'react-dnd'
-import { Redirect } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import {CurrencyIcon, ConstructorElement, Button} from '@ya.praktikum/react-developer-burger-ui-components'
 import Modal from '../modal/modal'
 import OrderDetails from '../modal/order-details/order-details'
@@ -12,6 +12,8 @@ import { postOrder } from '../../services/slices/orderSlice'
  
 export default function BurgerConstructor() {
   const dispatch = useDispatch()
+  const history = useHistory()
+  const location = useLocation()
   const bun = useSelector(store => store.constructorList.bun)
   const otherIngredients = useSelector(store => store.constructorList.items)
   const sum = useSelector(store => store.constructorList.sum)
@@ -38,9 +40,11 @@ export default function BurgerConstructor() {
     dispatch(postOrder(newArr))
     setIsOpen(true)
     } else{
-      console.log('here?? E')
-      return <Redirect to={'/login'}/>
-      //I dont understand why dont work? 
+      if (!store.email) {
+        history.replace({pathname: '/login', state: {target: location}});
+        return;
+    }
+
     }
   }
 
@@ -65,7 +69,7 @@ export default function BurgerConstructor() {
       /> 
     </section>
     {otherIngredients.length? 
-      <section className={otherIngredients.length>3 && styles.scroll}>
+      <section className={otherIngredients.length>3? styles.scroll :''}>
         {otherIngredients.map((item, index)=>
           <section key={item._id}>
             <BurgerConstructorDragged item={item} index={index} />

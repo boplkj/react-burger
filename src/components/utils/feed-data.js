@@ -32,7 +32,7 @@ const feedData  = [
   "price":500
 },
 {
-  "id":"1234556",
+  "id":"01234556",
   "time":"Сегодня, 16:20 i-GMT+3",
   "name":"Death Star Starship Main бургер",
   "status": "Готовится",

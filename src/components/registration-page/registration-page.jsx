@@ -40,6 +40,7 @@ export default function RegistrationPage() {
   return(
         <div className={styles.root}>
           <div className = {styles.formWrapper}>
+          <form onSubmit={register} className= {styles.form} >
           <section className={styles.logo}>
             <Logo/>
           </section>
@@ -70,10 +71,11 @@ export default function RegistrationPage() {
             />
           </section>
           <section className={styles.button}>
-            <Button onClick={register} >
+            <Button >
               Зарегистрироваться
             </Button>
           </section>
+          </form>
           <section className={styles.link}>
             <span className={`text text_type_main-default text_color_inactive`}>
               Уже зарегистрированы?

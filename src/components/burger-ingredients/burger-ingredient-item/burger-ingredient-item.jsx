@@ -1,25 +1,21 @@
-import React, {useState} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './styles.module.css'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from 'react-redux'
-import Modal from '../../modal/modal'
-import IngredientDetails from '../../modal/ingredients-details/ingredient-details'
+
 import { useDrag } from 'react-dnd';
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 export default function BurgerIngredientItem({data}) {
-
-
-const [isOpen, setIsOpen] = useState(false)
-
+const location = useLocation();
 const items = useSelector(store => store.constructorList.items)
 const bun = useSelector(store => store.constructorList.bun)
 
 let count 
 if (data.type ==='bun') {
   if (data._id === bun._id) {
-    count = 1}
+    count = 2}
   else count = null
 }else {
  count = items.filter(item => item.id===data._id).length>=1? items.filter(item => item.id===data._id).length: null
@@ -38,8 +34,8 @@ const [, drag, ] = useDrag(() => ({
 
   return(
     <>
-      <div ref = {drag} className={styles.root} onClick={()=>  setIsOpen(true) && <Link to={`/ingredients/${data._id}`}/> } >
-       
+  <Link to={{pathname: `/ingredients/${data._id}`, state: {background: location}}}>
+      <div ref = {drag} className={styles.root} >
         <section className={styles.image}>
         {count && (
           <section className={styles.counter}>
@@ -49,19 +45,13 @@ const [, drag, ] = useDrag(() => ({
         }
           <img src={data.image} alt = {data.name}/>
           </section>
-         
          <section className={styles.price} >
          <span className={styles.priceNum}>{data.price}</span>
          <CurrencyIcon/> 
        </section>
        <span className = {styles.itemName}>{data.name}</span>
        </div>
-       {
-         isOpen && 
-         <Modal handleClose = {() =>{setIsOpen(false)}} title='Детали ингредиента' >
-         <IngredientDetails data={data}/>
-        </Modal>
-       }
+       </Link>
        </>
         )}
 

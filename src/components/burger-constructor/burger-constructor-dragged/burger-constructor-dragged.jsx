@@ -1,5 +1,6 @@
 import React, {useRef} from 'react'
 import styles from '../styles.module.css'
+import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { changeIndex, removeIngredient } from '../../../services/slices/constructorListSlice'
 import { useDrag, useDrop } from 'react-dnd'
@@ -43,6 +44,7 @@ export default function BurgerConstructorDragged({item, index}) {
     },
   });
    drag(drop(ref));
+   console.log(item, 'itemmmm!')
 
   return(
         <>
@@ -57,4 +59,24 @@ export default function BurgerConstructorDragged({item, index}) {
           </section>
           </>
         )
+  
       }
+      BurgerConstructorDragged.propTypes = {
+        item:PropTypes.shape({
+          calories: PropTypes.number,
+          carbohydrates: PropTypes.number,
+          fat: PropTypes.number,
+          id: PropTypes.string,
+          image: PropTypes.string.isRequired,
+          image_large: PropTypes.string,
+          image_mobile: PropTypes.string,
+          name: PropTypes.string.isRequired,
+          price: PropTypes.number.isRequired,
+          proteins: PropTypes.number,
+          type: PropTypes.string,
+          __v: PropTypes.number,
+          _id: PropTypes.number
+          }),
+          index: PropTypes.number
+
+      }; 

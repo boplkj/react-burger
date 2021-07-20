@@ -26,7 +26,6 @@ export default function ProfilePage() {
     dispatch(userInfoRequest())
   }, [])
 
-  console.log(store)
   useEffect(() => {
     setData({ email: store.email, name: store.name, })
   }, [store])
@@ -84,6 +83,7 @@ export default function ProfilePage() {
           </div>
           {location.pathname==='/profile' ?
           <div className={styles.inputWrapper}>
+            <form onSubmit={save}>
             <section className={styles.input} >
               <Input 
                 placeholder={'Имя'}
@@ -144,10 +144,11 @@ export default function ProfilePage() {
                 </Button>
               </section>
             </section>
+            </form>
           </div>
         :
         <div className={styles.feed}> 
-        <Feed/>
+        <Feed link= {'profile/orders'}/>
         </div>
         }
         

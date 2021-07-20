@@ -12,7 +12,12 @@
   width: 480px;
   composes: ml-30 from global;
 }
-
+.form {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+}
 .logo{
   composes: mt-20 from global;
 }

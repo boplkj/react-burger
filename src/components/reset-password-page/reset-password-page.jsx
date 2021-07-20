@@ -32,6 +32,7 @@ export default function ResetPasswordPage() {
   return(
         <div className={styles.root}>
           <div className = {styles.formWrapper}>
+            <form className = {styles.form} onSubmit={restore}>
           <section className={styles.logo}>
             <Logo/>
           </section>
@@ -51,10 +52,11 @@ export default function ResetPasswordPage() {
               />
           </section>
           <section className={styles.button}>
-            <Button onClick={restore}>
+            <Button>
               Восстановить
             </Button>
           </section>
+          </form>
           <section className={styles.link}>
             <section>
               <span className={`text text_type_main-default text_color_inactive mt-4`}>

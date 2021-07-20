@@ -3,21 +3,18 @@ import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-dev
 import { Link } from 'react-router-dom'
 import styles from './styles.module.css'
 
+
 export default function AppHeader() {
 
   return (
     <header className={styles.root}>
-
       <div className={styles.leftSide}>
-        
           <section className={styles.menuTap} >
             <BurgerIcon/> 
             <Link  to={'/'}>
             <span className={styles.text}>Конструктор</span>
             </Link>
           </section>
-        
-
         <Link to={'/feed'}>
           <section className={styles.menuTap}>
             <ListIcon/> 

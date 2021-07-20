@@ -11,6 +11,7 @@ const authSlice = createSlice({
     name:'',
     email:'',
     resetPassword:false,
+    logoutToken: false
   },
   reducers: {
     registerSucces: (state, action) => {
@@ -30,7 +31,6 @@ const authSlice = createSlice({
       }
     },
     userInfoSucsess: (state, action) => {
-      console.log(action.payload, 'actoin payload')
       return { 
         name: action.payload.name,
         email: action.payload.email,
@@ -77,7 +77,13 @@ const authSlice = createSlice({
     },
 
     requestError: (state, action) => {
-      console.log('error?')
+      return {
+        error: true,
+        loading: false,
+        errorCode: action.payload
+      }
+    },
+    requestTokenError: (state, action) => {
       return {
         error: true,
         loading: false,
@@ -104,6 +110,7 @@ export const {
    changePasswordSucsess,
    newTokenSucsess,
    logoutSucsess,
+   requestTokenError,
    requestError,
    request 
   } = authSlice.actions
@@ -137,7 +144,6 @@ export const registerRequest = (data) => (dispatch) => {
 }
 
 export const loginRequest = (data) => (dispatch) => {
-  console.log(data,'data')
   dispatch(request())
   fetch(LOGIN_URL, {   
   method: 'POST',
@@ -167,7 +173,6 @@ export const loginRequest = (data) => (dispatch) => {
 
 export  const userInfoRequest = (data) => (dispatch) => {
   dispatch(request())
-  console.log(getCookie("accessToken"), 'KYKA')
   fetch(USER_INfO_URL, {   
   method: 'GET',
   mode: 'cors',
@@ -183,13 +188,11 @@ export  const userInfoRequest = (data) => (dispatch) => {
       if(res.ok){
         res.json()
         .then(({ user }) => {
-          console.log(user, 'user?')
           dispatch(userInfoSucsess(user))
         })
       }else if (!res.ok){
         const ress = await res.json()
-        console.log(ress,'message')
-        if(ress.message === 'jwt expired'){
+        if(ress.message === 'jwt expired' && getCookie()){
           await dispatch(newTokenRequest());
 		      await dispatch(userInfoRequest());
         }
@@ -205,7 +208,6 @@ export  const userInfoRequest = (data) => (dispatch) => {
 
 export const userUpdateInfoRequest = (data) => (dispatch) => {
   dispatch(request())
-  console.log(data)
   fetch(USER_INfO_URL, {   
   method: 'PATCH',
   mode: 'cors',
@@ -218,11 +220,12 @@ export const userUpdateInfoRequest = (data) => (dispatch) => {
   body: JSON.stringify(data),
   
 })
-    .then(res => console.log(res.json))
-    .then(({ accessToken, refreshToken, user  }) => {
+    .then(res => res.ok ? res.json() : Promise.reject(res.status))
+    .then(({user}) => {
       dispatch(userUpdateInfoSucsess(user))
     })
     .catch((e) => {
+      deleteCookie()
       dispatch(requestError("Ошибка HTTP: " + e))
     })
 }
@@ -285,8 +288,9 @@ export const newTokenRequest = (data) => (dispatch) => {
     body: JSON.stringify({token: getCookie('refreshToken')})	
 })
 
-    .then(res => console.log(res.json(), 'resssss'))
-    .then(({ accessToken, refreshToken,  }) => {
+    .then(res => res.ok ?  console.log(res.json(), 'res'): Promise.reject(res.status))
+    .then(({ accessToken, refreshToken }) => {
+
       if(accessToken){
         const token = accessToken.split('Bearer ')[1];
         setCookie('accessToken', token);  
@@ -297,7 +301,8 @@ export const newTokenRequest = (data) => (dispatch) => {
       dispatch(newTokenSucsess())
     })
     .catch((e) => {
-      dispatch(requestError("Ошибка HTTP: " + e))
+      deleteCookie()
+      dispatch(requestTokenError("Ошибка HTTP: " + e))
     })
 }
 
@@ -315,7 +320,7 @@ export const logoutRequest = (data) => (dispatch) => {
 })
     .then(res => res.ok ? res.json() : Promise.reject(res.status))
     .then(({ accessToken, refreshToken, user  }) => {
-      console.log(accessToken, 'data', refreshToken )
+      deleteCookie()
       dispatch(logoutSucsess(data))
     })
     .catch((e) => {

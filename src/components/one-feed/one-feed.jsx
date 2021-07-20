@@ -1,41 +1,50 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import feedData from '../utils/feed-data'
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import React, {useState, useEffect} from 'react'
 import styles from './styles.module.css'
+import feedData from '../utils/feed-data'
+import {  useLocation } from 'react-router-dom'
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+export default function OneFeed() {
 
-function Feed({link, status}) {
-  console.log(link, 'link')
-  return (
-    <ul
-      className={styles.root}
-    >
-      {feedData.map((item)=> { 
-        return(
-        <li className={styles.order} key={item.id}>
-        <Link
-          to={{ pathname: `/${link}/${item.id}` }}
-          style={{ color: "#fff" }}
-        >
+  const [data, setData] = useState({})
+  const location = useLocation()
+
+const id = location.pathname.split('0')[1]
+console.log(location, 'location')
+
+useEffect(
+  () => {
+    feedData.forEach((item)=> {
+      if (item.id === '0'+id){
+        setData(item)
+      }
+    })
+  },
+  [id]
+)
+
+console.log( 'gggg', id, data)
+
+  return(
+    <div className={styles.root}>
+      <div className={styles.rootWrapper}>
           <span className={styles.id}>
-            {'#'+item.id}
+            {'#'+data.id}
           </span>
           <span className={styles.time}>
-            {item.time}
+            {data.time}
           </span>
           <span className={styles.name}>
-            {item.name}
+            {data.name}
           </span>
-          {status && (
+          {data.status && (
             <span
               className={styles.status}
             >
-             {item.status}
+             {data.status}
             </span>
           )}
           <ul className={styles.circles}>
-          {item.images.map((ingregient, index)=> {
+          {data.images && data.images.map((ingregient, index)=> {
             return(
             <li className={styles.circle} key={index}>
               <img
@@ -48,18 +57,11 @@ function Feed({link, status}) {
         </ul>
         <div className={styles.priceWrapper}>
             <span className={styles.price}>
-              {item.price}
+              {data.price}
             </span>
             <CurrencyIcon type="primary" />
           </div>
-        </Link>
-      </li>
-      )})}
-    </ul>
-  );
-}
-Feed.propTypes = {
-  link: PropTypes.string.isRequired,
-  status: PropTypes.bool,
-};
-export default Feed;
+          </div>
+        </div>)}
+        
+  
