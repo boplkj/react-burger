@@ -1,0 +1,35 @@
+const feedDataProgress  = [
+  {
+    "id":"32234545",
+    "status":"AtWork" 
+  },
+  {
+    "id":"31231234",
+    "status":"AtWork" 
+  },
+  {
+    "id":"42123",
+    "status":"AtWork" 
+  },
+  {
+    "id":"034535",
+    "status":"AtWork" 
+  },
+  {
+    "id":"0345535", 
+    "status":"Complite" 
+  },
+  {
+    "id":"0354535",
+    "status":"Complite" 
+  },
+  {
+    "id":"03345635",
+    "status":"Complite" 
+  },
+  {
+    "id":"1234556",
+    "status":"Complite" 
+  },
+]
+export default feedDataProgress

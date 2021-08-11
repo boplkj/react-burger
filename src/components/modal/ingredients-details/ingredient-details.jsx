@@ -1,12 +1,29 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, {useMemo, useState} from 'react'
+import { useSelector } from 'react-redux'
+import { useLocation} from "react-router-dom";
 //import {CheckMarkIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './styles.module.css'
  
-export default function IngredientDetails({data}) {
+export default function IngredientDetails() {
+  const ingredientsArr = useSelector(store => store.ingredientsList.loadingData)
+  const location = useLocation();
+  const [data, setData] = useState({})
 
+  const id =location.pathname.split('/ingredients/')[1]
+
+  useMemo(
+    () => {
+      ingredientsArr.forEach((item)=> {
+        if (item._id === id){
+          setData(item)
+        }
+      })
+    },
+    [id,ingredientsArr]
+  )
   return(
     <div className={styles.root}>
+      <div className= {styles.wrapper}>
       <section className={styles.ingredientHeader}>
       <img src={data.image} className={styles.ingredientImage} alt={data.name} />
 
@@ -38,17 +55,8 @@ export default function IngredientDetails({data}) {
         </section>
 
         </section>
+        </div>
       </div>
         )
       }
       
-      IngredientDetails.propTypes = {
-        data: PropTypes.shape({
-          image: PropTypes.string,
-          name: PropTypes.string,
-          calories: PropTypes.number,
-          proteins: PropTypes.number,
-          fat: PropTypes.number,
-          carbohydrates: PropTypes.number
-          }).isRequired
-      }; 

@@ -1,0 +1,54 @@
+.root{
+  display: flex;
+  justify-content: center;
+  margin-right: 300px; 
+  composes: mt-20 mr-30 from global;
+
+}
+.links{
+  justify-content: center;
+  width: 320px;
+}
+
+.link{
+  composes: mt-4 from global;
+}
+
+.text{
+  composes: text text_type_main-medium text_color_inactive from global; 
+}
+
+.textInfo{
+  composes: mt-15 from global;
+}
+.textSmall{
+  composes: mt-7 text text_type_main-small text_color_inactive from global;
+}
+
+.active{
+  composes: text text_type_main-medium  from global;
+}
+
+.inputWrapper{
+  composes: ml-20  from global;
+}
+
+.input{
+  composes: mt-4  from global;
+}
+
+.buttons{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  composes: mt-5  from global;
+}
+
+.saveBtn{
+  composes: ml-5  from global;
+}
+
+.feed{
+  margin-left: 150px;
+  
+}

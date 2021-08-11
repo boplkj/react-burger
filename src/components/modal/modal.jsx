@@ -13,6 +13,7 @@ export default function Modal({title, handleClose, children}){
         handleClose()
       }
     }
+
     document.addEventListener('keydown', close)
   return () => document.removeEventListener('keydown', close)
 },[handleClose])

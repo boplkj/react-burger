@@ -1,2 +1,8 @@
 export const INGREDIENTS_API_URL  = 'https://norma.nomoreparties.space/api/ingredients'
 export const ORDER_API_URL = 'https://norma.nomoreparties.space/api/orders'
+export const REGISTER_URL = 'https://norma.nomoreparties.space/api/auth/register'
+export const LOGIN_URL = 'https://norma.nomoreparties.space/api/auth/login'
+export const LOGOUT_URL = 'https://norma.nomoreparties.space/api/auth/logout'
+export const USER_INfO_URL = 'https://norma.nomoreparties.space/api/auth/user'
+export const PASSWORD_RESET_URL = 'https://norma.nomoreparties.space/api/password-reset'
+export const RESET_TOKEN_URL = 'https://norma.nomoreparties.space/api/auth/token'
