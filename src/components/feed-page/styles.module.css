@@ -53,3 +53,11 @@ padding: 0;
   display: flex;
   flex-direction:column;
 }
+
+.column {
+  display: flex;
+  flex-direction:row;
+}
+.columnSec{
+  margin-left: 20px;
+}
