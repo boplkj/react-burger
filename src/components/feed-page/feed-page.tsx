@@ -25,14 +25,14 @@ const FeedPage: React.FC=()=> {
           <div className={styles.column}>
           <ul>
             {done.slice(0,9).map((item:any) => (
-                 <li className={styles.complite}>{item.number}</li>
+                 <li key ={item._id} className={styles.complite}>{item.number}</li>
               ))
             }
           </ul>
           { (done.length>=10)&& 
           <ul className={styles.columnSec}>
             {done.slice(9,18).map((item:any) => (
-                 <li className={styles.complite}>{item.number}</li>
+                 <li key ={item._id} className={styles.complite}>{item.number}</li>
               ))
             }
           </ul>  }

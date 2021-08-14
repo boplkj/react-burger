@@ -43,7 +43,6 @@ const constructorListSlice = createSlice({
       state.items.splice(action.payload.index, 1)
     },
     changeIndex: (state, action) =>{
-      console.log(action, 'action')
       const startIndex = action.payload.startIndex
       const endIndex = action.payload.endIndex
       const temp = state.items[startIndex]

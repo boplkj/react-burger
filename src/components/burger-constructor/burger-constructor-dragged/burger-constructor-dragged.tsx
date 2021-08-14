@@ -1,7 +1,6 @@
 import React, {useRef} from 'react'
 import styles from '../styles.module.css'
-import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
+import {useAppDispatch} from '../../../services/store'
 import { changeIndex, removeIngredient } from '../../../services/slices/constructorListSlice'
 import { useDrag, useDrop } from 'react-dnd'
 import { DragIcon, ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components'
@@ -12,13 +11,10 @@ import {IItem} from '../../../services/slices/constructorListSlice'
    index: number
  }
 const BurgerConstructorDragged: React.FC<IProps> =({item, index})=>{
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [, drag, ] = useDrag(() => ({
     type:'sort',
     item: {index},
-    collect: (monitor) => ({
-        isDragging: !!monitor.isDragging(),
-    }),
   }), []);
   const ref = useRef<any>()
 
@@ -30,25 +26,26 @@ const BurgerConstructorDragged: React.FC<IProps> =({item, index})=>{
         }
         const startIndex = item.index;
         const endIndex = index;
+
         if (startIndex === endIndex) {
             return;
         }
         const hoverBoundingRect = ref.current?.getBoundingClientRect();
         const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
         const clientOffset = monitor.getClientOffset();
+
         const hoverClientY = clientOffset?.y || 0 - hoverBoundingRect.top;
-        if (startIndex < endIndex && hoverClientY < hoverMiddleY) {
-            return;
-        }
-        if (startIndex > endIndex && hoverClientY > hoverMiddleY) {
-            return;
-        }
+        // if (startIndex < endIndex && hoverClientY < hoverMiddleY) {
+        //     return;
+        // }
+        // if (startIndex > endIndex && hoverClientY > hoverMiddleY) {
+        //     return;
+        // }
         dispatch(changeIndex({startIndex, endIndex}))
         item.index = endIndex;
     },
   });
    drag(drop(ref));
-   console.log(item, 'itemmmm!')
 
   return(
         <>

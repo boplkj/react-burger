@@ -1,15 +1,15 @@
 import React, { useCallback ,useState} from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styles from './styles.module.css'
 import { registerRequest } from '../../services/slices/authSlice'
 import {PasswordInput, EmailInput, Logo, Button, Input} from '@ya.praktikum/react-developer-burger-ui-components'
-import {RootState}  from '../../services/store'
+import {RootState, useAppDispatch}  from '../../services/store'
 
 const RegistrationPage: React.FC=()=> {
   const store  = useSelector((store:RootState) => store.auth);
   console.log(store)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [data, setData] = useState({
     email: '',
     password: '',

@@ -1,14 +1,12 @@
-import React, {useMemo, useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import feedData from '../utils/feed-data'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { wsOpenConnection, wsClose } from '../../services/slices/orderFeedSlice'
 import status from '../helpers/status'
 import { useLocation} from "react-router-dom";
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './styles.module.css'
-import {RootState}  from '../../services/store'
+import {RootState, useAppDispatch}  from '../../services/store'
 
 interface IProps{
   link: string
@@ -16,7 +14,7 @@ interface IProps{
 const Feed: React.FC<IProps>=({link}) => {
   const location = useLocation();
   console.log(location)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const store = useSelector((store:RootState) => store.orderFeed)
   const allIngredients = useSelector((store:RootState) => store.ingredientsList)
   useEffect(() => {
@@ -25,7 +23,7 @@ const Feed: React.FC<IProps>=({link}) => {
       dispatch(wsOpenConnection({url:'wss://norma.nomoreparties.space/orders/all', user:false}))
     }
     else{
-       dispatch(wsOpenConnection({url:'wss://norma.nomoreparties.space/orders/', user:true}))
+       dispatch(wsOpenConnection({url:'wss://norma.nomoreparties.space/orders', user:true}))
     } 
     return () => {
       console.log('close')
@@ -63,7 +61,7 @@ const Feed: React.FC<IProps>=({link}) => {
         return(
         <li className={styles.order} key={item.number}>
         <Link
-          to={{ pathname: `/${link}/${item._id}` }}
+          to={{ pathname: `/${link}/${item._id}`, state: {background: location} }}
           style={{ color: "#fff" }}
         >
           <span className={styles.id}>

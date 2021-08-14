@@ -1,7 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit'
-import {REGISTER_URL, LOGIN_URL,USER_INfO_URL,PASSWORD_RESET_URL,RESET_TOKEN_URL, LOGOUT_URL} from '../../components/utils/url'
-
+import { createSlice, Dispatch } from '@reduxjs/toolkit'
+import {REGISTER_URL, LOGIN_URL,USER_INfO_URL,PASSWORD_RESET_URL,RESET_TOKEN_URL} from '../../components/utils/url'
 import { setCookie, getCookie, deleteCookie } from "../cookie"
+
+interface IData {
+  name?:string
+  email?:string
+  password?:string
+  token?: string
+
+}
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -123,7 +130,7 @@ export const {
    request 
   } = authSlice.actions
 
-export const registerRequest = (data:object) => (dispatch:any) => {
+export const registerRequest = (data:IData) => (dispatch:Dispatch) => {
   dispatch(request())
   fetch(REGISTER_URL, {   
   method: 'POST',
@@ -151,7 +158,7 @@ export const registerRequest = (data:object) => (dispatch:any) => {
     })
 }
 
-export const loginRequest = (data:object) => (dispatch:any) => {
+export const loginRequest = (data: IData) => (dispatch:Dispatch) => {
   dispatch(request())
   fetch(LOGIN_URL, {   
   method: 'POST',
@@ -214,7 +221,7 @@ export  const userInfoRequest = () => (dispatch:any) => {
     })
 }
 
-export const userUpdateInfoRequest = (data:object) => (dispatch:any) => {
+export const userUpdateInfoRequest = (data:IData) => (dispatch:Dispatch) => {
   dispatch(request())
   fetch(USER_INfO_URL, {   
   method: 'PATCH',
@@ -238,7 +245,7 @@ export const userUpdateInfoRequest = (data:object) => (dispatch:any) => {
     })
 }
 
-export const resetPasswordRequest = (data:object) => (dispatch:any) => {
+export const resetPasswordRequest = (data:IData) => (dispatch:Dispatch) => {
   dispatch(request())
   fetch(PASSWORD_RESET_URL, {   
   method: 'POST',
@@ -261,7 +268,7 @@ export const resetPasswordRequest = (data:object) => (dispatch:any) => {
 }
 
 
-export const changePasswordRequest = (data:object) => (dispatch:any) => {
+export const changePasswordRequest = (data:IData) => (dispatch:Dispatch) => {
   dispatch(request())
   fetch(PASSWORD_RESET_URL, {   
   method: 'POST',
@@ -283,7 +290,7 @@ export const changePasswordRequest = (data:object) => (dispatch:any) => {
     })
 }
 
-export const newTokenRequest = () => (dispatch:any) => {
+export const newTokenRequest = () => (dispatch:Dispatch) => {
   dispatch(request())
   fetch(RESET_TOKEN_URL, {   
   method: 'POST',
@@ -313,7 +320,7 @@ export const newTokenRequest = () => (dispatch:any) => {
     })
 }
 
-export const logoutRequest = () => (dispatch:any) => {
+export const logoutRequest = () => (dispatch:Dispatch) => {
   dispatch(request())
   fetch(PASSWORD_RESET_URL, {   
   method: 'POST',

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styles from './styles.module.css'
 import { userInfoRequest, logoutRequest } from '../../services/slices/authSlice'
 import { Link, useLocation } from 'react-router-dom'
 import Feed from '../feed/feed'
-import {RootState}  from '../../services/store'
+import {RootState, useAppDispatch}  from '../../services/store'
 
 const ProfileOrder: React.FC=() =>{
   const location = useLocation()
@@ -13,7 +13,7 @@ const ProfileOrder: React.FC=() =>{
   const [active] = useState({profile:false, history:true, exit:false})
 
  
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
 
   useEffect(() => {

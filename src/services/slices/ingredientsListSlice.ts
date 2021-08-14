@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, Dispatch } from '@reduxjs/toolkit'
 import {INGREDIENTS_API_URL} from '../../components/utils/url'
 
 export interface IData {
@@ -60,7 +60,7 @@ const ingredientsListSlice = createSlice({
 
 export const { requestSucces, requestError, request } = ingredientsListSlice.actions
 
-export const getIngredients = () => (dispatch:any) => {
+export const getIngredients = () => (dispatch:Dispatch) => {
   dispatch(request())
   fetch(INGREDIENTS_API_URL)
     .then(res => res.ok ? res.json() : Promise.reject(res.status))

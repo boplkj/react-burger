@@ -6,6 +6,7 @@ import authSlice  from './slices/authSlice'
 import orderFeedSlice  from './slices/orderFeedSlice'
 import oneFeedSlice from  './slices/oneFeedSlice'
 import wsMiddleware  from './middleware/wsMiddleware'
+import { useDispatch } from 'react-redux'
 
 
 const middlewares = [
@@ -30,3 +31,7 @@ export const store = configureStore({
 })
 
 export type RootState = ReturnType<typeof rootReducer>
+
+
+export type AppDispatch = typeof store.dispatch
+export const useAppDispatch = () => useDispatch<AppDispatch>()

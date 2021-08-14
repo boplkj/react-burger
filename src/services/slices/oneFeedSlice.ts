@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, Dispatch } from '@reduxjs/toolkit'
 import {ORDER_API_URL} from '../../components/utils/url'
 
 export const oneFeedSlice = createSlice({
@@ -36,13 +36,13 @@ export const oneFeedSlice = createSlice({
 
 export const { feedSuccess, feedError, request } = oneFeedSlice.actions
 
-export const getFeed = (feedItem:string) => (dispatch:any) => {
+export const getFeed = (feedItem:string) => (dispatch:Dispatch) => {
   dispatch(request())
   fetch(ORDER_API_URL+'/'+feedItem)
     .then(res => res.ok ? res.json() : Promise.reject(res.status))
-    .then(( {orders} ) => {
-      console.log(orders, 'data?')
-      dispatch(feedSuccess(orders))
+    .then(( res ) => {
+      console.log(res, 'data?')
+      dispatch(feedSuccess(res.orders))
     })
     .catch((e) => {
       dispatch(feedError("Ошибка HTTP: " + e))

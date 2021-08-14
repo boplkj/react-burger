@@ -2,7 +2,6 @@ import React, {useEffect} from 'react'
 import ReactDOM from 'react-dom'
 import styles from './styles.module.css'
 import ModalOverlay from './modal-overlay/modal-overlay'
-import PropTypes from 'prop-types'
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 interface IProps {
   title?:string

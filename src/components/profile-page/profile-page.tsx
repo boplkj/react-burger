@@ -1,11 +1,11 @@
 import React, {useEffect, useState, useCallback} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styles from './styles.module.css'
 import { userInfoRequest, userUpdateInfoRequest, logoutRequest } from '../../services/slices/authSlice'
 import { Button, Input} from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, useLocation } from 'react-router-dom'
 import Feed from '../feed/feed'
-import {RootState}  from '../../services/store'
+import {RootState, useAppDispatch}  from '../../services/store'
 
 const ProfilePage: React.FC=() =>{
   const location = useLocation()
@@ -16,7 +16,7 @@ const ProfilePage: React.FC=() =>{
   const [disableEmail, setdisableEmail] =useState(true)
   const [disablePass, setDisablePass] = useState(true)
  
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [data, setData] = useState({
     email: store.email,
     name: store.name,
@@ -25,7 +25,7 @@ const ProfilePage: React.FC=() =>{
 
   useEffect(() => {
     dispatch(userInfoRequest())
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     setData({ email: store.email, name: store.name, password: '' })

@@ -2,7 +2,6 @@
 import { Route, Redirect } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import {RootState}  from '../../services/store'
 
 interface IProp {
@@ -34,9 +33,4 @@ const ProtectedRoute: React.FC<IProp>=({ children, ...rest }) =>{
     />
   );
 }
-ProtectedRoute.propTypes = {
-  children: PropTypes.node.isRequired,
-  rest: PropTypes.object
-};
-
 export default ProtectedRoute;

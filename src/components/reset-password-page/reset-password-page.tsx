@@ -1,14 +1,14 @@
-import React, {useCallback, useState, useEffect} from 'react'
+import React, {useCallback, useState} from 'react'
 import styles from './styles.module.css'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { changePasswordRequest } from '../../services/slices/authSlice'
-import { Input, Logo, Button, PasswordInput} from '@ya.praktikum/react-developer-burger-ui-components'
-import {RootState}  from '../../services/store'
+import { Input, Logo, Button} from '@ya.praktikum/react-developer-burger-ui-components'
+import {RootState, useAppDispatch}  from '../../services/store'
 
 const ResetPasswordPage: React.FC=() =>{
   const store  = useSelector((store: RootState) => store.auth);
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   
   const [data, setData] = useState({
     token: '',

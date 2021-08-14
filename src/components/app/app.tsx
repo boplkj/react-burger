@@ -7,7 +7,8 @@ import ForgotPasswordPage from '../forgot-password-page/forgot-password-page'
 import ResetPasswordPage from '../reset-password-page/reset-password-page'
 import FeedPage from '../feed-page/feed-page'
 import ProfilePage from '../profile-page/profile-page'
-import { useDispatch, useSelector } from 'react-redux'
+import {  useSelector } from 'react-redux'
+import {useAppDispatch} from '../../services/store'
 import { getIngredients } from '../../services/slices/ingredientsListSlice'
 import { userInfoRequest } from '../../services/slices/authSlice'
 
@@ -19,6 +20,7 @@ import Modal from '../modal/modal'
 import IngredientDetails from '../modal/ingredients-details/ingredient-details'
 import {getCookie} from '../../services/cookie'
 import OneFeed from '../one-feed/one-feed'
+import OneFeedModal from '../modal/one-feed-modal/one-feed-modal'
 import ProfileOrder from '../profile-order/profile-order'
 //import localData from '../utils/local-data'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
@@ -32,7 +34,7 @@ const App: React.FC = ()=> {
   const undo = () => {
     history.goBack();
 }
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(getIngredients())
   },[dispatch])
@@ -77,14 +79,27 @@ const App: React.FC = ()=> {
             <ProtectedRoute exact={true} path="/profile/orders">
               <ProfileOrder/>
             </ProtectedRoute>
+            {background? (
             <ProtectedRoute path="/profile/orders/:id">
-              <OneFeed/>
-            </ProtectedRoute>
-            
+              <Modal handleClose={undo} title='Order' >
+              <OneFeedModal/>
+              </Modal>
+            </ProtectedRoute>):
+            (
+              <ProtectedRoute path="/profile/orders/:id">
+                <OneFeed/>
+              </ProtectedRoute>)}
+            {background? (
             <Route path="/feed/:id">
-              <OneFeed/>
-            </Route>
-
+              <Modal handleClose={undo} title='Order'>
+              <OneFeedModal/>
+              </Modal>
+            </Route>)
+            :
+            (<Route path="/feed/:id">
+            <OneFeed/>
+          </Route>)
+            }
             <Switch location={background || location}>
             <Route path='/' exact={true}>
           <section className = {styles.roott}>

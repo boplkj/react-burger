@@ -2,11 +2,11 @@ import React, {useState, useEffect, useMemo} from 'react'
 import styles from './styles.module.css'
 import {  useLocation } from 'react-router-dom'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { getFeed } from '../../services/slices/oneFeedSlice'
+import { getFeed } from '../../../services/slices/oneFeedSlice'
 import { useSelector } from 'react-redux'
-import {RootState, useAppDispatch}  from '../../services/store'
+import {RootState, useAppDispatch}  from '../../../services/store'
 
-const OneFeed:React.FC =() => {
+const OneFeedModal:React.FC =() => {
   const location = useLocation()
   const id = location.pathname.split('feed/')[1]
   console.log(id, 'id?')
@@ -56,9 +56,6 @@ if (data.length){
           <span className={styles.id}>
             {'#'+data[0].number}
           </span>
-          <span className={styles.time}>
-            {data[0].createdAt}
-          </span>
           <span className={styles.name}>
             {data[0].name}
           </span>
@@ -72,6 +69,7 @@ if (data.length){
           <ul className={styles.circles}>
           {arrayInfo.length && arrayInfo[0].map((ingregient:any, index:number)=> {
             return(
+              <div className={styles.ingregientWrapper}>
             <li className={styles.circle} key={index}>
               <img
                 src={ingregient.image}
@@ -79,13 +77,26 @@ if (data.length){
                 alt='Burger Ingredients'
               />
             </li>
+            <div className= {styles.priceWrapper}>
+            <span className={styles.text}>{ingregient.name}</span>
+            <div className={styles.price}>
+            <CurrencyIcon type="primary" />
+            <span>{ingregient.price}</span>
+            </div>
+            </div>
+            </div>
           )})}
         </ul>
-        <div className={styles.priceWrapper}>
+        <div className={styles.fullPriceWrapper}>
+          <span className={styles.time}>
+            {data[0].createdAt}
+          </span>
+          <div className={styles.price}>
             <span className={styles.price}>
               {price}
             </span>
             <CurrencyIcon type="primary" />
+          </div>
           </div>
           </div>
         </div>
@@ -95,4 +106,4 @@ if (data.length){
         )
         }
         
-  export default OneFeed
+  export default OneFeedModal

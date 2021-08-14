@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import styles from './styles.module.css'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector} from 'react-redux'
 import { addIngredient } from '../../services/slices/constructorListSlice'
 import { useDrop } from 'react-dnd'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -9,10 +9,10 @@ import Modal from '../modal/modal'
 import OrderDetails from '../modal/order-details/order-details'
 import BurgerConstructorDragged from './burger-constructor-dragged/burger-constructor-dragged'
 import { postOrder } from '../../services/slices/orderSlice'
-import { RootState } from '../../services/store'
+import { RootState, useAppDispatch } from '../../services/store'
  
 const BurgerConstructor: React.FC= () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const history = useHistory()
   const location = useLocation()
   const bun = useSelector((store: RootState) => store.constructorList.bun)
@@ -64,7 +64,7 @@ const BurgerConstructor: React.FC= () => {
         <ConstructorElement
         type="top"
         isLocked={true}
-        text={bun.name}
+        text={bun.name + ' (верх)'}
         price={bun.price}
         thumbnail={bun.image}
       /> 
@@ -81,7 +81,7 @@ const BurgerConstructor: React.FC= () => {
     <ConstructorElement
       type="bottom"
       isLocked={true}
-      text={bun.name}
+      text={bun.name + ' (низ)'}
       price={bun.price}
       thumbnail={bun.image}
     /> 

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, Dispatch } from '@reduxjs/toolkit'
 import {ORDER_API_URL} from '../../components/utils/url'
 import {  getCookie  } from "../cookie"
 
@@ -35,7 +35,7 @@ export const orderSlice = createSlice({
 
 export const { orderSuccess, orderError, request } = orderSlice.actions
 
-export const postOrder = (burgerIngredients:object) => async(dispatch:any) => {
+export const postOrder = (burgerIngredients:object) => async(dispatch:Dispatch) => {
 
   dispatch(request())
   const res = await fetch(ORDER_API_URL, {

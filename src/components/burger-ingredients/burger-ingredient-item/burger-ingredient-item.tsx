@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styles from './styles.module.css'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from 'react-redux'
@@ -38,7 +37,6 @@ const [, drag, ] = useDrag(() => ({
 
 
   return(
-    <>
   <Link to={{pathname: `/ingredients/${data._id}`, state: {background: location}}}>
       <div ref = {drag} className={styles.roott} id = 'drug' >
         <section className={styles.image}>
@@ -57,15 +55,7 @@ const [, drag, ] = useDrag(() => ({
        <span className = {styles.itemName}>{data.name}</span>
        </div>
        </Link>
-       </>
         )}
 
-        BurgerIngredientItem.propTypes = {
-          data:PropTypes.shape({
-            name: PropTypes.string,
-            price: PropTypes.number,
-            image: PropTypes.string
-            }).isRequired
-        }; 
   
         export default BurgerIngredientItem

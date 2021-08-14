@@ -17,10 +17,13 @@ import {  getCookie } from "../cookie"
 
       if ( type === wsOpenConnection(null).type ) {
         if (!payload.user){
+          console.log('here???1')
         socket = new WebSocket(payload.url);
         }else if (payload.user){
           const accessToken= getCookie("accessToken")
-          socket = new WebSocket(payload.url+`?token=${accessToken}`);
+          console.log('here???', payload.url+`?token=${accessToken}`)
+
+          socket = new WebSocket(payload.url+`?token=${accessToken}`)
         }
       }
 
