@@ -1,8 +1,6 @@
 
 import { Route, Redirect } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import {RootState}  from '../../services/store'
+import {getCookie} from '../../services/cookie'
 
 interface IProp {
   children?: any
@@ -11,14 +9,16 @@ interface IProp {
   path?: any
 }
 const ProtectedRoute: React.FC<IProp>=({ children, ...rest }) =>{
-  const store  = useSelector((store:RootState) => store.auth)
-  console.log(typeof(rest), 'storeee')
+  const cookie = getCookie("accessToken")
+
+
+
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        store.email ? (
+        cookie ? (
           children
         ) : 
         (

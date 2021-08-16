@@ -1,13 +1,12 @@
 import React, {useState, useCallback} from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { resetPasswordRequest } from '../../services/slices/authSlice'
 import styles from './styles.module.css'
 import { Input, Logo, Button} from '@ya.praktikum/react-developer-burger-ui-components'
-import {RootState, useAppDispatch}  from '../../services/store'
+import { useAppDispatch, useAppSelector}  from '../../services/store'
 
 const ForgotPasswordPage: React.FC=()=> {
-  const store  = useSelector((store:RootState) => store.auth);
+  const store  = useAppSelector((store) => store.auth);
   const dispatch = useAppDispatch()
   const [data, setData] = useState({
     email: '',

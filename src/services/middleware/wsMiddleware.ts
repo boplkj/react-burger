@@ -7,15 +7,16 @@ import {
   wsSuccess
 } from '../slices/orderFeedSlice'
 import {  getCookie } from "../cookie"
+import { MiddlewareAPI, AnyAction} from "redux";
 
  const wsMiddleware = () => {
-  return ( store:any ) => {
-    let socket:any = null
-      return (next:any) => (action:any) => {
+  return ( store:MiddlewareAPI ) => {
+    let socket:WebSocket|null = null
+      return (next:(a: AnyAction) => void) => (action:AnyAction) => {
       const { dispatch } = store;
       const { type, payload } = action;
 
-      if ( type === wsOpenConnection(null).type ) {
+      if ( type === wsOpenConnection(null).type) {
         if (!payload.user){
           console.log('here???1')
         socket = new WebSocket(payload.url);
@@ -32,21 +33,21 @@ import {  getCookie } from "../cookie"
       }
 
       if ( socket ) {
-        socket.onopen = ( event:any ) => {
+        socket.onopen = () => {
           dispatch( wsSuccess() );
         };
 
-        socket.onmessage = ( event:any ) => {
+        socket.onmessage = ( event ) => {
           const { data } = event;
           const parsedData = JSON.parse( data );
           dispatch(  wsRes(parsedData) );
         };
 
-        socket.onerror = ( event:any ) => {
+        socket.onerror = () => {
           dispatch( wsError( ) );
         };
 
-        socket.onclose = ( event:any ) => {
+        socket.onclose = () => {
           dispatch( wsClose( ) );
         };
       }

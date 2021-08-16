@@ -1,16 +1,15 @@
 import React, {useEffect, useState, useCallback} from 'react'
-import { useSelector } from 'react-redux'
 import styles from './styles.module.css'
 import { userInfoRequest, userUpdateInfoRequest, logoutRequest } from '../../services/slices/authSlice'
 import { Button, Input} from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, useLocation } from 'react-router-dom'
 import Feed from '../feed/feed'
-import {RootState, useAppDispatch}  from '../../services/store'
+import { useAppDispatch, useAppSelector}  from '../../services/store'
 
 const ProfilePage: React.FC=() =>{
   const location = useLocation()
   console.log(location.pathname,'ffffff')
-  const store  = useSelector((store:RootState) => store.auth);
+  const store  = useAppSelector((store) => store.auth);
   const [active] = useState({profile:true, history:false, exit:false})
   const [disableName, setDisableName] = useState(true)
   const [disableEmail, setdisableEmail] =useState(true)
@@ -87,7 +86,7 @@ const ProfilePage: React.FC=() =>{
                 placeholder={'Имя'}
                 type={'text'} 
                 name={'name'} 
-                value={data.name}
+                value={data.name || ''}
                 onChange={onChange}
                 disabled={disableName}
                 icon ={disableName? 'EditIcon': 'CloseIcon'}
@@ -103,7 +102,7 @@ const ProfilePage: React.FC=() =>{
               <Input 
               name={'email'} 
               placeholder={'Логин'}
-              value={data.email}
+              value={data.email||''}
               disabled={disableEmail}
               icon ={disableEmail? 'EditIcon': 'CloseIcon'}
               onChange={onChange}

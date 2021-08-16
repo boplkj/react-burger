@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { wsOpenConnection, wsClose } from '../../services/slices/orderFeedSlice'
 import status from '../helpers/status'
 import { useLocation} from "react-router-dom";
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './styles.module.css'
-import {RootState, useAppDispatch}  from '../../services/store'
+import { useAppDispatch, useAppSelector}  from '../../services/store'
 
 interface IProps{
   link: string
@@ -15,8 +14,8 @@ const Feed: React.FC<IProps>=({link}) => {
   const location = useLocation();
   console.log(location)
   const dispatch = useAppDispatch()
-  const store = useSelector((store:RootState) => store.orderFeed)
-  const allIngredients = useSelector((store:RootState) => store.ingredientsList)
+  const store = useAppSelector((store) => store.orderFeed)
+  const allIngredients = useAppSelector((store) => store.ingredientsList)
   useEffect(() => {
     if (location.pathname === '/feed'){   
       console.log('here?')       
@@ -57,7 +56,7 @@ const Feed: React.FC<IProps>=({link}) => {
     <ul
       className={styles.root}
     >
-      {store.orders.map((item:any, index)=> { 
+      {store.orders.map((item:any, index:number)=> { 
         return(
         <li className={styles.order} key={item.number}>
         <Link

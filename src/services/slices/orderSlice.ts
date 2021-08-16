@@ -1,6 +1,14 @@
-import { createSlice, Dispatch } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import {ORDER_API_URL} from '../../components/utils/url'
 import {  getCookie  } from "../cookie"
+
+import {AppDispatch} from '../store'
+interface IState {
+  request:boolean
+  success: number
+  error:boolean
+  errorCode: string
+}
 
 export const orderSlice = createSlice({
   name: 'order',
@@ -9,7 +17,7 @@ export const orderSlice = createSlice({
     success: 0,
     error: false,
     errorCode: ''
-  },
+  } as IState,
   reducers: {
     orderSuccess: (state, action) => ({
       error: false,
@@ -35,7 +43,7 @@ export const orderSlice = createSlice({
 
 export const { orderSuccess, orderError, request } = orderSlice.actions
 
-export const postOrder = (burgerIngredients:object) => async(dispatch:Dispatch) => {
+export const postOrder = (burgerIngredients:object) => async(dispatch:AppDispatch) => {
 
   dispatch(request())
   const res = await fetch(ORDER_API_URL, {

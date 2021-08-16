@@ -1,11 +1,9 @@
 import React from 'react'
 import styles from './styles.module.css'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector } from 'react-redux'
-
+import {useAppSelector} from '../../../services/store'
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom'
-import {RootState}  from '../../../services/store'
 
 
 interface IProp{
@@ -13,8 +11,8 @@ interface IProp{
 }
 const BurgerIngredientItem: React.FC<IProp> =({data}) => {
 const location = useLocation();
-const items = useSelector((store: RootState) => store.constructorList.items)
-const bun = useSelector((store: RootState)=> store.constructorList.bun)
+const items = useAppSelector((store) => store.constructorList.items)
+const bun = useAppSelector((store)=> store.constructorList.bun)
 
 let count 
 if (data.type ==='bun') {

@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import styles from './styles.module.css'
-import { useSelector} from 'react-redux'
 import { addIngredient } from '../../services/slices/constructorListSlice'
 import { useDrop } from 'react-dnd'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -9,17 +8,18 @@ import Modal from '../modal/modal'
 import OrderDetails from '../modal/order-details/order-details'
 import BurgerConstructorDragged from './burger-constructor-dragged/burger-constructor-dragged'
 import { postOrder } from '../../services/slices/orderSlice'
-import { RootState, useAppDispatch } from '../../services/store'
+import { useAppDispatch } from '../../services/store'
+import {useAppSelector} from '../../services/store'
  
 const BurgerConstructor: React.FC= () => {
   const dispatch = useAppDispatch()
   const history = useHistory()
   const location = useLocation()
-  const bun = useSelector((store: RootState) => store.constructorList.bun)
-  const otherIngredients = useSelector((store: RootState) => store.constructorList.items)
-  const sum = useSelector((store: RootState) => store.constructorList.sum)
-  const order = useSelector((store: RootState) => store.order)
-  const store  = useSelector((store: RootState) => store.auth);
+  const bun = useAppSelector((store) => store.constructorList.bun)
+  const otherIngredients = useAppSelector((store) => store.constructorList.items)
+  const sum = useAppSelector((store) => store.constructorList.sum)
+  const order = useAppSelector((store) => store.order)
+  const store  = useAppSelector((store) => store.auth);
   const [, drop] = useDrop({
     accept: 'item',
     drop: (item) => {dispatch(addIngredient(item)) 

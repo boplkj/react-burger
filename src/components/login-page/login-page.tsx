@@ -1,13 +1,12 @@
 import React, {useCallback, useState} from 'react'
 import { Link, Redirect, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import styles from './styles.module.css'
 import {PasswordInput, EmailInput, Logo, Button} from '@ya.praktikum/react-developer-burger-ui-components'
 import { loginRequest } from '../../services/slices/authSlice'
-import {RootState, useAppDispatch}  from '../../services/store'
+import { useAppDispatch, useAppSelector}  from '../../services/store'
 
 const LoginPage: React.FC=() =>{
-  const store  = useSelector((store:RootState) => store.auth);
+  const store  = useAppSelector((store) => store.auth);
 
   const dispatch = useAppDispatch()
   

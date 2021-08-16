@@ -1,11 +1,10 @@
 import React, {useRef} from 'react'
-import {useSelector } from 'react-redux'
+import {useAppSelector} from '../../services/store'
 import styles from './styles.module.css'
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientItem from './burger-ingredient-item/burger-ingredient-item'
-import { RootState } from '../../services/store'
  const BurgerIngredients: React.FC= () =>{
-  const data = useSelector((store: RootState)=> store.ingredientsList.loadingData)
+  const data = useAppSelector((store)=> store.ingredientsList.loadingData)
   const [current, setCurrent] = React.useState('one')
 
   const scrollRef = useRef<any>()

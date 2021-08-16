@@ -22,7 +22,7 @@ const constructorListSlice = createSlice({
     items: [],
     bun: {name: 'Это место зарезервировано под Булку',image: q, price:0 },
     sum: 0, 
-  } as IState,reducers: {
+  } as IState, reducers: {
     addIngredient: (state, action) => {
     if (action.payload.type ==='bun' && !state.bun.type) {
       state.bun = action.payload

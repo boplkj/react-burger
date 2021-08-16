@@ -2,12 +2,11 @@ import React ,{useMemo, useEffect, useState} from 'react'
 import Feed from '../feed/feed'
 import feedDataProgress from '../utils/feed-data-progress'
 import styles from './styles.module.css'
-import {  useSelector } from 'react-redux'
-import {RootState}  from '../../services/store'
+import {useAppSelector} from '../../services/store'
 
 const FeedPage: React.FC=()=> {
-  const items = useSelector((store:RootState) => store.orderFeed.orders)
-  const store = useSelector((store:RootState) => store.orderFeed)
+  const items = useAppSelector((store) => store.orderFeed.orders)
+  const store = useAppSelector((store) => store.orderFeed)
   const atWork:any = []
   const done:any =[]
   items.forEach((item:any)=>{

@@ -1,5 +1,24 @@
-import { createSlice, Dispatch } from '@reduxjs/toolkit'
+import { createSlice} from '@reduxjs/toolkit'
 import {ORDER_API_URL} from '../../components/utils/url'
+import {AppDispatch} from '../store'
+interface IItem {
+  createdAt: string
+  ingredients: string[]
+  name: string
+  number: number
+  owner: string
+  status:string
+  updatedAt: string
+  __v: string
+  _id: string
+}
+interface IState {
+  order:IItem[],
+  request:boolean
+  success:boolean
+  error:boolean
+  errorCode: string
+}
 
 export const oneFeedSlice = createSlice({
   name: 'orderssf',
@@ -9,9 +28,9 @@ export const oneFeedSlice = createSlice({
     success: false,
     error: false,
     errorCode: ''
-  },
+  }as IState,
   reducers: {
-    feedSuccess: (state, action) => ( {
+    feedSuccess: (state, action) => ({
       ...state,
       error: false,
       errorCode: '',
@@ -36,7 +55,7 @@ export const oneFeedSlice = createSlice({
 
 export const { feedSuccess, feedError, request } = oneFeedSlice.actions
 
-export const getFeed = (feedItem:string) => (dispatch:Dispatch) => {
+export const getFeed = (feedItem:string) => (dispatch:AppDispatch) => {
   dispatch(request())
   fetch(ORDER_API_URL+'/'+feedItem)
     .then(res => res.ok ? res.json() : Promise.reject(res.status))

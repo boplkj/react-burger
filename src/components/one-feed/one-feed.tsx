@@ -3,18 +3,16 @@ import styles from './styles.module.css'
 import {  useLocation } from 'react-router-dom'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { getFeed } from '../../services/slices/oneFeedSlice'
-import { useSelector } from 'react-redux'
-import {RootState, useAppDispatch}  from '../../services/store'
+import { useAppDispatch, useAppSelector}  from '../../services/store'
 
 const OneFeed:React.FC =() => {
   const location = useLocation()
   const id = location.pathname.split('feed/')[1]
-  console.log(id, 'id?')
   const [data, setData] =useState<any>([])
   let price
   const dispatch = useAppDispatch()
-  const dataArr = useSelector((store:RootState) => store.oneFeed.order)
-  const allIngredients = useSelector((store:RootState) => store.ingredientsList)
+  const dataArr = useAppSelector((store) => store.oneFeed.order)
+  const allIngredients = useAppSelector((store) => store.ingredientsList)
   useEffect(()=>{
     dispatch(getFeed(id))
   },[dispatch, id])

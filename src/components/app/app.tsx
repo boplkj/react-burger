@@ -7,8 +7,7 @@ import ForgotPasswordPage from '../forgot-password-page/forgot-password-page'
 import ResetPasswordPage from '../reset-password-page/reset-password-page'
 import FeedPage from '../feed-page/feed-page'
 import ProfilePage from '../profile-page/profile-page'
-import {  useSelector } from 'react-redux'
-import {useAppDispatch} from '../../services/store'
+import {useAppDispatch, useAppSelector} from '../../services/store'
 import { getIngredients } from '../../services/slices/ingredientsListSlice'
 import { userInfoRequest } from '../../services/slices/authSlice'
 
@@ -25,7 +24,7 @@ import ProfileOrder from '../profile-order/profile-order'
 //import localData from '../utils/local-data'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import styles from './styles.module.css'
-import {RootState}  from '../../services/store'
+
 
 const App: React.FC = ()=> {
   const location = useLocation<{ background?: Location }>();
@@ -40,7 +39,7 @@ const App: React.FC = ()=> {
   },[dispatch])
 
   const cookie = getCookie("accessToken")
-  const email  = useSelector((store:RootState) => store.auth.email);
+  const email  = useAppSelector((store) => store.auth.email);
   useMemo(() => {
     if (cookie && !email) {
        dispatch(userInfoRequest())

@@ -1,6 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {WS_ALL_ORDERS_URL, WS_USER_ORDERS_URL } from '../../components/utils/url'
-import { setCookie, getCookie, deleteCookie } from "../cookie"
+
+interface IItem {
+  createdAt:string
+  ingredients: string[]
+  name: string
+  number: number
+  owner: string
+  status:string
+  updatedAt: string
+  __v: string
+  _id: string
+}
+interface IState {
+  total:string
+  totalToday: string
+  orders: IItem[]
+  wsConnected:boolean
+  wsLoading:boolean
+  error:boolean
+}
+
 const orderFeedSlice = createSlice({
   name: 'orderFeed',
   initialState: {
@@ -10,14 +29,12 @@ const orderFeedSlice = createSlice({
     wsConnected: false,
     wsLoading:false,
     error: false,
-  },
+  } as IState,
   reducers: {
     wsOpenConnection:(state, action) =>{
-      
       state.wsLoading = true
     },
     wsSuccess: ( state ) => {
-
       state.wsLoading = false
       state.wsConnected = true;
       state.error = false;

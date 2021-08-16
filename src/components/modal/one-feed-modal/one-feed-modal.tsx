@@ -3,18 +3,18 @@ import styles from './styles.module.css'
 import {  useLocation } from 'react-router-dom'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { getFeed } from '../../../services/slices/oneFeedSlice'
-import { useSelector } from 'react-redux'
-import {RootState, useAppDispatch}  from '../../../services/store'
+import { useAppDispatch, useAppSelector}  from '../../../services/store'
 
 const OneFeedModal:React.FC =() => {
   const location = useLocation()
   const id = location.pathname.split('feed/')[1]
   console.log(id, 'id?')
-  const [data, setData] =useState<any>([])
+  const [data, setData] = useState<any>([])
   let price
   const dispatch = useAppDispatch()
-  const dataArr = useSelector((store:RootState) => store.oneFeed.order)
-  const allIngredients = useSelector((store:RootState) => store.ingredientsList)
+  const dataArr = useAppSelector((store) => store.oneFeed.order)
+  const isResponse = useAppSelector((store) => store.oneFeed.request)
+  const allIngredients = useAppSelector((store) => store.ingredientsList)
   useEffect(()=>{
     dispatch(getFeed(id))
   },[dispatch, id])
@@ -25,28 +25,41 @@ const OneFeedModal:React.FC =() => {
     }
   },[dataArr])
 
+  const ingredientsWithCount:any = {}
+
+if (dataArr.length){
+dataArr[0].ingredients.forEach(el=>{
+  if (ingredientsWithCount[el]){
+    ingredientsWithCount[el]++
+  } else {
+    ingredientsWithCount[el] = 1
+  }
+})
+}
+
 let arrayInfo:any = []
-if (data.length){
-   arrayInfo = data.map((item:any) => {
-    const tempArr:any = []
+
+if (Object.keys(ingredientsWithCount).length) {
+    const tempArr:any= []
     const priceArr:any =[]
-     item.ingredients.forEach((ingredient:any)=>{
+   Object.keys(ingredientsWithCount).forEach((ingredient:any, index:number)=>{
+      console.log(ingredient, 'ingredient')
        allIngredients.loadingData.forEach((ingredients) => {
          if (ingredients._id===ingredient){
            priceArr.push(ingredients.price)
-           tempArr.push(ingredients)
-         }
-     })
+           tempArr.push(ingredients)   
+     }
    })
    if (priceArr.length){
    price = priceArr.reduce((a:any, b:any) => {
     return a + b
 })
    }
-   return tempArr
+   arrayInfo= tempArr
    })
   }
 
+  console.log(arrayInfo, 'arr info')
 
   return(
   <>
@@ -67,10 +80,10 @@ if (data.length){
             </span>
           )}
           <ul className={styles.circles}>
-          {arrayInfo.length && arrayInfo[0].map((ingregient:any, index:number)=> {
+          {arrayInfo.length && arrayInfo.map((ingregient:any, index:number)=> {
             return(
-              <div className={styles.ingregientWrapper}>
-            <li className={styles.circle} key={index}>
+              <div className={styles.ingregientWrapper} key={index}>
+            <li className={styles.circle} >
               <img
                 src={ingregient.image}
                 width="60px"
@@ -82,6 +95,9 @@ if (data.length){
             <div className={styles.price}>
             <CurrencyIcon type="primary" />
             <span>{ingregient.price}</span>
+            {ingregient.type!=='bun'?
+            <span>x{ingredientsWithCount[ingregient._id]}</span>:
+            <span>x2</span>}
             </div>
             </div>
             </div>
@@ -100,9 +116,8 @@ if (data.length){
           </div>
           </div>
         </div>
-      :<span>К сожалению сервер не передал данные по запросу {`https://norma.nomoreparties.space/api/orders/${id}`} </span> }
+      :isResponse? <span>Loading</span>: <span>К сожалению сервер не передал данные по запросу {`https://norma.nomoreparties.space/api/orders/${id}`} </span> }
         </>
-            
         )
         }
         

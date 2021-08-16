@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from 'react'
-import { useSelector } from 'react-redux'
 import styles from './styles.module.css'
 import { userInfoRequest, logoutRequest } from '../../services/slices/authSlice'
 import { Link, useLocation } from 'react-router-dom'
 import Feed from '../feed/feed'
-import {RootState, useAppDispatch}  from '../../services/store'
+import { useAppDispatch, useAppSelector}  from '../../services/store'
 
 const ProfileOrder: React.FC=() =>{
   const location = useLocation()
   console.log(location.pathname,'ffffff')
-  const store  = useSelector((store:RootState) => store.auth);
+  const store  = useAppSelector((store) => store.auth);
   const [active] = useState({profile:false, history:true, exit:false})
 
  

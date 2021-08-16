@@ -1,13 +1,13 @@
 import React, {useMemo, useState} from 'react'
-import { useSelector } from 'react-redux'
+import {useAppSelector} from '../../../services/store'
 import { useLocation} from "react-router-dom";
 //import {CheckMarkIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './styles.module.css'
-import {RootState}  from '../../../services/store'
+
 import {IData} from '../../../services/slices/ingredientsListSlice'
 
 const IngredientDetails: React.FC=() =>{
-  const ingredientsArr = useSelector((store: RootState) => store.ingredientsList.loadingData)
+  const ingredientsArr = useAppSelector((store) => store.ingredientsList.loadingData)
   const location = useLocation();
   const [data, setData] = useState<IData>({})
 
