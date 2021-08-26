@@ -1,0 +1,81 @@
+.root{
+display: flex;
+flex-direction: column;
+flex-direction: center;
+width: 700px;
+}
+.rootWrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+.ingregientWrapper{
+  margin-top: 10px; 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+.circles{
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 200px
+}
+.id {
+align-self: center;
+composes: text text_type_main-medium from global;
+}
+
+.circles li{
+	list-style-type: none;
+}
+.circle{
+  border: 2px solid #801AB2;
+  background-color:  #1C1C21;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 80px;
+  display: flex;
+  align-items: center;
+  width: 60px;
+  height:60px;
+}
+.priceWrapper{
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.price{
+  margin-left: 30px;
+  display: flex;
+  justify-content: space-around;
+  composes: text text_type_digits-default from global;
+}
+.text{
+  margin-left: 5px;
+  composes: text text_type_main-default from global;
+}
+
+.name{
+  float: left;
+  margin-left: 24px;
+  margin-top: 24px;
+  min-width: 500px;
+  composes: text text_type_main-medium from global;
+}
+
+.status{
+  float: left;
+  margin-left: 24px;
+  margin-top: 8px;
+ composes: text text_type_main-default from global;
+}
+
+.fullPriceWrapper{
+  margin-left: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
